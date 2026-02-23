@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.metacoding.springv2._core.handler.ex.Exception400;
 import com.metacoding.springv2._core.handler.ex.Exception401;
 import com.metacoding.springv2._core.util.JwtUtil;
 import com.metacoding.springv2.auth.AuthRequest.JoinDTO;
@@ -48,6 +49,17 @@ public class AuthService {
                 .build();
         userRepository.save(user);
         return new AuthResponse.DTO(user);
+    }
+
+    /**
+     * 유저네임 중복체크
+     * 
+     * @param username
+     */
+    public void 유저네임중복체크(String username) {
+        userRepository.findByUsername(username).ifPresent(user -> {
+            throw new Exception400("이미 중복된 유저네임입니다");
+        });
     }
 
 }

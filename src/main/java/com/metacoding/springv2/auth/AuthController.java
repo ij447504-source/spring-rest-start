@@ -1,6 +1,7 @@
 package com.metacoding.springv2.auth;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
 import com.metacoding.springv2._core.util.Resp;
+import com.metacoding.springv2.user.User;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +42,12 @@ public class AuthController {
     public ResponseEntity<?> check(@RequestParam("username") String username) {
         authService.유저네임중복체크(username);
         return Resp.ok("사용가능한 유저네임입니다");
+    }
+
+    @PostMapping("/api/logout")
+    public ResponseEntity<?> logout(@AuthenticationPrincipal User sessionUser) {
+        String respDTO = authService.logout(sessionUser);
+        return Resp.ok(respDTO);
     }
 
     @GetMapping("/health")

@@ -27,6 +27,10 @@ public class Reply {
     @CreationTimestamp
     private Timestamp createdAt;
 
+    public void update(String comment) {
+        this.comment = comment;
+    }
+
     @Builder
     public Reply(Integer id, String comment, User user, Board board, Timestamp createdAt) {
         this.id = id;

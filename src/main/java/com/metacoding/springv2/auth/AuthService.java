@@ -62,4 +62,7 @@ public class AuthService {
         });
     }
 
+    public String logout(User sessionUser) {
+        return "로그아웃 되었습니다";
+    }
 }

@@ -10,3 +10,6 @@
   ex) SecurityConfig에 CORS필터를 직접 적용했는데, filterConfig에 CORS부분과 filter 폴더에 CorsFilter 코드를
   삭제하지 않았어!
   - 분석은 한글로해줘
+    -stream api 쓸대, 람다식으로 써줘(::new 이런거 쓰지마마)
+  - @Transactional(readOnly = true)를 Service 클래스 위에 전역적으로 붙여줘
+- Lazy로딩인 것들을 조회할때 select를 여러번 하지말고, fetch join 메서드 만들어서 조인해서 가져와줘
